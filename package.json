@@ -1,0 +1,61 @@
+{
+  "name": "dev-rev-proxy",
+  "version": "0.1.0",
+  "description": "An out-of-box proxy server to help development using SSL on local.",
+  "author": {
+    "name": "Yuhsak Inoue",
+    "email": "yuhsak.inoue@gmail.com",
+    "url": "https://github.com/yuhsak"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuhsak/dev-rev-proxy.git"
+  },
+  "main": "lib/common/index.js",
+  "types": "lib/types/index.d.ts",
+  "module": "lib/esm/index.js",
+  "files": [
+    "lib",
+    "src",
+    "!lib/**/*.tsbuildinfo",
+    "tsconfig.json",
+    "tsconfig.common.json"
+  ],
+  "bin": {
+    "dev-rev-proxy": "lib/common/bin.js"
+  },
+  "scripts": {
+    "clean:dist": "rimraf lib",
+    "clean:test": "rimraf coverage",
+    "clean": "run-p clean:*",
+    "check:tsc": "tsc --noEmit",
+    "check:prettier": "prettier --check .",
+    "test:jest": "jest",
+    "check": "run-s check:*",
+    "test": "run-s  test:*",
+    "build:watch": "npm run build -- --watch",
+    "build": "tsc -b tsconfig.json tsconfig.common.json",
+    "prebuild": "run-p clean:dist",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.2.192",
+    "@swc/helpers": "^0.3.15",
+    "@swc/jest": "^0.2.21",
+    "@types/http-proxy": "^1.17.9",
+    "@types/jest": "^27.5.1",
+    "@types/minimist": "^1.2.2",
+    "jest": "28.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.2"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "envvv": "^1.2.2",
+    "http-proxy": "^1.18.1",
+    "minimist": "^1.2.6"
+  }
+}
