@@ -1,6 +1,6 @@
 {
   "name": "dev-rev-proxy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An out-of-box proxy server to help development using SSL on local.",
   "author": {
     "name": "Yuhsak Inoue",
