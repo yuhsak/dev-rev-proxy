@@ -19,7 +19,7 @@ export type DevRevProxyOption = Omit<ReturnType<typeof typed>, 'help'>
 
 export const parse = (args: string[]) => {
   const option = parseArgs(args, {
-    string: ['port', 'targetPort'],
+    string: ['p', 'port', 'P', 'target-port'],
     alias: {
       h: 'host',
       p: 'port',
@@ -40,11 +40,19 @@ export const parse = (args: string[]) => {
     },
   })
 
-  option.help = option.help === true ? 'true' : 'false'
-  option.changeOrigin = option.changeOrigin === true ? 'true' : 'false'
-  option.followRedirects = option.followRedirects === true ? 'true' : 'false'
-  option.autoRewrite = option.autoRewrite === true ? 'true' : 'false'
-  option.cookieDomainRewrite = option.cookieDomainRewrite === true ? 'true' : 'false'
+  const handleBoolable = (value: any) => {
+    if (value === true) return 'true'
+    if (value === false) return 'false'
+    if (value === 1) return 'true'
+    if (value === 0) return 'false'
+    return value
+  }
+
+  option.help = handleBoolable(option.help)
+  option.changeOrigin = handleBoolable(option.changeOrigin)
+  option.followRedirects = handleBoolable(option.followRedirects)
+  option.autoRewrite = handleBoolable(option.autoRewrite)
+  option.cookieDomainRewrite = handleBoolable(option.cookieDomainRewrite)
 
   return typed(option)
 }
